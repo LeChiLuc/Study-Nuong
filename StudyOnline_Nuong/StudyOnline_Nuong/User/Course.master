@@ -1,0 +1,54 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="Course.master.cs" Inherits="StudyOnline_Nuong.User.Course" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="../Scripts/jquery-1.7.1.js"></script>
+    <script src="../Admin/ckeditor/ckeditor.js"></script>
+    <script src="../Admin/ckfinder/ckfinder.js"></script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="container">
+        <div id="edit-template">
+            <div class="top">
+                <div class="left-col">
+                    <div style="background-image: url(../Upload/User/WP_002425.jpg)" class="course-image"></div>
+                    <hgroup class="titles">
+                        <h1>
+                            <a href="#" class="ellipsis">  <asp:Label ID="lblTenKhoaHoc" runat="server"></asp:Label>  </a>
+                        </h1>
+                        <h2><a href="#">
+                            <b><asp:Label ID="lblTenThanhVien" runat="server"></asp:Label></b>
+                        </a>
+                        </h2>
+                    </hgroup>
+                </div>
+                <div class="right-col">
+                    <asp:Button ID="btnXuatBan" runat="server" class="ud-popup btn btn-success btn-small right-btn" Text="Xuất bản" OnClick="btnXuatBan_Click" />
+                    <%--<a class="ud-popup btn btn-success btn-small right-btn" href="#" id="publish-btn">Xuất bản</a>--%>
+                    <asp:Button ID="btnXem" class="btn btn-small right-btn" runat="server" Text="Xem" OnClick="btnXem_Click" />
+                   <%-- <a href="#" class="btn btn-small right-btn">Xem</a>--%>
+                </div>
+            </div>
+            <div id="main-section">
+                <div class="side-nav lined res-menu draft">
+                    <ul>
+                        <li>
+                            <span>Thông tin khóa học</span>
+                        </li>
+                        <%-- <li class="on">--%>
+
+                        <li class="">
+                            <asp:Label ID="lblMenuCoBan" runat="server"></asp:Label>
+                       
+                        </li>
+                        <li class="">
+                            <asp:Label ID="lblMenuChiTiet" runat="server"></asp:Label>
+                        </li>
+                    </ul>
+                </div>
+
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </div>
+</asp:Content>

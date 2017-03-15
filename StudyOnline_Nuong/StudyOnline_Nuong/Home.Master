@@ -1,0 +1,337 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Home.master.cs" Inherits="StudyOnline_Nuong.Home" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Study English Online - TMCEdu</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="Style/1.css" rel="stylesheet" />
+    <link href="Style/2.css" rel="stylesheet" />
+    <link href="Style/3.css" rel="stylesheet" />
+    <link href="Style/4.css" rel="stylesheet" />
+    <script src="../Scripts/jquery-1.7.1.js"></script>
+    <link href="Style/a.css" rel="stylesheet" />
+    <link href="Style/b.css" rel="stylesheet" />
+    <link href="Style/c.css" rel="stylesheet" />
+    <link href="Style/d.css" rel="stylesheet" />
+    <%--   <script src="Scripts/jquery.cycle.all.js"></script>--%>
+</head>
+<body class="udemy controller-courses action-featured  white-bg pageloaded">
+    <form id="form1" runat="server">
+        <header id="header-v2" class="udemy-header">
+
+            <div class="header-v4 ">
+                <div class="container">
+                    <div class="general-header-inner fxac">
+                        <div class="general-header-left fxac fx">
+                            <div class="btn-group cats-dropdown ">
+                                <div class="dropdown-toggle cats-toggle fxac">
+                                    <a class="white-link sb" href="#">
+                                        Tìm Kiếm </a>
+                                </div>
+                            </div>
+
+                            <div class="ud-search search-v4 ml15" style="margin-top: 9px; margin-left: 10px;">
+                                <div id="searchbox">
+                                    <input type="text" id="txtSearch" placeholder="Tìm kiếm khóa học" name="q" class="search-input ui-autocomplete-input quick-search" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <a href="/">
+                            <img class="udemy-logo" src="../Images/logo_home.png" alt="TMC Logo" width="100" style="margin-left: 10px;" />
+                        </a>
+                        <%if (Session["UserName"] == null)
+                          {%>
+
+                        <div class="general-header-right fx fxac fxje" id="Login_No">
+                            <a onclick="enableFormLogin()" href="javascript:void(0)" class="ud-popup white-link sb login-link">Đăng nhập</a>
+                            <span class="green-separator"></span>
+                            <a onclick="enableFormSignUp()" href="javascript:void(0)" class="ud-popup white-link sb signup-link">Đăng ký</a>
+
+                        </div>
+
+                        <%} %>
+                        <%else
+                          { %>
+                        <div class="general-header-right fx fxac fxje" id="Login_Yes">
+                            <a href="../User/CourseCreate.aspx" class="white-link sb become-ins-link">Tạo khóa học</a>
+                            <span class="green-separator"></span>
+                            <a href="../User/CourseUserManage.aspx" class="white-link sb my-courses-link">Khóa học của tôi</a>
+                            <span class="green-separator"></span>
+                            <a href="javascript:void(0)" onclick="Logout()" class="white-link sb become-ins-link">Đăng xuất</a>
+                        </div>
+                        <%} %>
+
+                        <%-- Login--%>
+                        <div id="form-login" class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: none; z-index: 9999;">
+                            <div class="fancybox-wrap fancybox-desktop fancybox-type-ajax fancybox-opened" tabindex="-1" style="width: 710px; height: auto; position: absolute; top: 120px; left: 270px; opacity: 1; overflow: visible;">
+                                <div class="fancybox-skin" style="padding: 0px; width: auto; height: auto;">
+                                    <div class="fancybox-outer">
+                                        <div class="fancybox-inner" style="overflow: auto; width: 710px; height: auto;">
+                                            <div id="sticky-footer-wrapper">
+                                                <div id="popup-inner" class="with-facebook  static-content-wrapper">
+                                                    <div id="login-box-header">
+                                                        <h3>Đăng nhập và bắt đầu học!</h3>
+                                                    </div>
+                                                    <div id="login-box-container" class="clearfix table popup-signup-box">
+                                                        <div id="login-fb-wrapper" class="cell">
+                                                            <h3>Đăng nhập qua Facebook</h3>
+                                                            <div class="fb-connect-button-wrapper">
+                                                                <a class="fb-connect-button font-os" href="#">Đăng nhập qua <b>Facebook</b></a>
+                                                            </div>
+                                                        </div>
+                                                        <div id="login-form-wrapper" class="cell">
+                                                            <h3 class="pb10">hoặc với tài khoản TCMEdu</h3>
+
+                                                            <div class="form-errors black-tooltip none">
+                                                                <p></p>
+                                                            </div>
+                                                            <div class="manage-fields-wrapper ">
+                                                                <div class=" non-labeled" id="form-item-email">
+                                                                    <div id="tooltip-reference-email" class="tooltip-reference">
+                                                                        <input id="txtEmail_Login" name="email" type="email" class="text-input  " placeholder="E-mail">
+                                                                    </div>
+                                                                </div>
+                                                                <div class=" non-labeled" id="form-item-password">
+                                                                    <div id="tooltip-reference-password" class="tooltip-reference">
+                                                                        <input id="txtPassword_Login" name="password" type="password" class="text-input  " placeholder="Mật khẩu">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="submit-row">
+                                                                <input value="Đăng nhập" onclick="Login()" class="btn btn-success" data-loading-text="Login">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style="padding: 15px">
+                                                        Bạn chưa có tài khoản? <a class="btn btn-primary ud-popup" style="display: inline; margin-left: 5px;" href="../SignUp.aspx">Đăng ký </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a title="Close" class="fancybox-item fancybox-close" onclick="closeFormLogin()" href="javascript:void(0)"></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <%-- Singup --%>
+                        <div id="signup-form" class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: none; z-index: 9999;">
+                            <div class="fancybox-wrap fancybox-desktop fancybox-type-ajax fancybox-opened" tabindex="-1" style="width: 710px; height: auto; position: absolute; top: 120px; left: 270px; opacity: 1; overflow: visible;">
+                                <div class="fancybox-skin" style="padding: 0px; width: auto; height: auto;">
+                                    <div class="fancybox-outer">
+                                        <div class="fancybox-inner" style="overflow: auto; width: 710px; height: auto;">
+                                            <div id="sticky-footer-wrapper">
+                                                <div id="popup-inner" class="with-facebook static-content-wrapper">
+                                                    <div id="login-box-header">
+                                                        <h3 class="">Tham gia hôm nay và học ngay bây giờ!</h3>
+                                                    </div>
+                                                    <div id="login-box-container" class="clearfix table popup-signup-box">
+                                                        <div id="login-fb-wrapper" class="cell">
+                                                            <h3>Đăng nhập qua Facebook</h3>
+                                                            <div class="fb-connect-button-wrapper">
+                                                                <a class="fb-connect-button font-os" href="">Kết nối với <b>Facebook</b></a>
+                                                            </div>
+                                                            <div id="fb-signup-box">
+                                                                <fb:facepile max-rows="5" width="300" data-max-rows="5" data-width="170"></fb:facepile>
+                                                            </div>
+                                                        </div>
+                                                        <div id="login-form-wrapper" class="cell">
+                                                            <h3 class="pb10">or E-mail</h3>
+
+                                                            <div class="form-errors black-tooltip none">
+                                                                <p></p>
+                                                            </div>
+                                                            <div class="manage-fields-wrapper ">
+                                                                <div class=" non-labeled" id="form-item-fullName">
+                                                                    <div id="tooltip-reference-fullName" class="tooltip-reference">
+                                                                        <input id="txtTenThanhVien_SignUp" name="fullName" type="text" class="text-input" placeholder="Họ và tên">
+                                                                    </div>
+                                                                </div>
+                                                                <div class=" non-labeled" id="form-item-email">
+                                                                    <div class="tooltip-reference">
+
+                                                                        <input id="txtEmail_SignUp" name="email" type="email" class="text-input" rel="isEmailValid" placeholder="E-mail">
+                                                                    </div>
+                                                                </div>
+                                                                <div class=" non-labeled" id="form-item-password">
+                                                                    <div class="tooltip-reference">
+                                                                        <input id="txtPassword_SignUp" name="password" type="password" class="text-input" placeholder="Mật khẩu">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="submit-row">
+                                                                <input value="Đăng ký" onclick="SignUp()" class="btn btn-success" data-loading-text="Signup" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style="padding: 15px">
+                                                        Bạn đã có tài khoản? <a class="btn btn-primary ud-popup" style="display: inline; margin-left: 5px;" href="../Login.aspx">Đăng nhập </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a title="Close" class="fancybox-item fancybox-close" onclick="closeFormSignUp()" href="javascript:void(0)"></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                //Hàm tìm kiếm
+                $('#txtSearch').bind('keypress', function (e) {
+                    var p = e.keyCode || e.which;
+                    var tukhoa = $('#txtSearch').val();
+                    if (p == 13) {
+                        window.location.replace("../Search.aspx?tukhoa=" + tukhoa + "");
+                    }
+                });
+               
+                function enableFormLogin() {
+                    $('#form-login').fadeIn('slow');
+                }
+                function closeFormLogin() {
+                    $('#form-login').fadeOut('slow');
+                }
+
+                function enableFormSignUp() {
+                    $('#signup-form').fadeIn('slow');
+
+                }
+                function closeFormSignUp() {
+                    $('#signup-form').fadeOut('slow');
+                }
+                //Kiểm tra mail có đúng định dạng mail hay không. Nếu đúng trả về true
+                function validateEmail(email) {
+                    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return re.test(email);
+                }
+                //Hàm đăng ký
+                function SignUp() {
+                    var tenthanhvien = $('input#txtTenThanhVien_SignUp').val();
+                    var matkhau = $('input#txtPassword_SignUp').val();
+                    var email = $('input#txtEmail_SignUp').val();
+                    var trangthai = 'TRUE';
+
+                    if (tenthanhvien == "" || matkhau == "" || email == "")
+                        alert("Thông tin đăng ký không được để trống");
+                    else {
+                        if (validateEmail(email)) {
+                            $.ajax({
+                                type: 'POST',
+                                contentType: 'application/json; charset=utf-8',
+                                url: '/Default.aspx/DangKyThanhVien',
+                                data: "{tenthanhvien:'" + tenthanhvien + "',matkhau:'" + matkhau + "',email:'" + email + "',trangthai:'" + trangthai + "'}",
+                                dataType: "json",
+                                success: function (response2) {
+                                    $('#signup-form').fadeOut('slow');
+                                    alert("Đăng ký thành công!");
+                                    var html = "<div class='general-header-right fx fxac fxje' id='Login_Yes'>" +
+                                                    "<a href='../User/CourseCreate.aspx' class='white-link sb become-ins-link'>Tạo khóa học</a>" +
+                                                    "<span class='green-separator'></span>" +
+                                                    "<a href='../User/CourseUserManage.aspx' class='white-link sb my-courses-link'>Khóa học của tôi</a>" +
+                                                    "<span class='green-separator'></span>" +
+                                                     "<a href='javascript:void(0)' onclick='Logout()' class='white-link sb my-courses-link'>Đăng xuất</a>" +
+                                               " </div>";
+                                    $('#Login_No').html(html);
+                                },
+                                error: function (e) {
+                                    alert("Đăng ký thất bại! Kiểm tra lại thông tin đăng ký");
+                                },
+                            });
+                        }
+                        else
+                            alert("Email không hợp lệ!");
+                    }
+
+                }
+                //Ham dang nhap
+                function Login() {
+                    //lay thong tin mat khau
+                    var matkhau = $('input#txtPassword_Login').val();
+                    //lay thong tin email
+                    var email = $('input#txtEmail_Login').val();
+
+                    if (matkhau == "" || email == "")
+                        alert("Thông tin đăng nhập không được để trống");
+                    else {
+                        if (validateEmail(email)) {
+
+                            //ham ajax
+                            $.ajax({
+                                type: 'POST', //co 2 loai POST va GET, dùng POST để che dấu các thông tin truyền về server trên url
+                                contentType: 'application/json; charset=utf-8', //khai báo những thông số với dữ liệu json, mã utf-8
+                                url: '/Default.aspx/DangNhapThanhVien', //đường dẫn phương thức xử lý đăng nhập ở server
+                                data: "{matkhau:'" + matkhau + "',email:'" + email + "'}",//dữ liệu truyền về server
+                                dataType: "json",//kiểu dữ liệu json
+                                success: function (response2) {
+                                    $('#form-login').fadeOut('slow');//ẩn form đăng nhập (dùng jquery)
+                                    alert("Đăng nhập thành công!");
+                                    var html = "<div class='general-header-right fx fxac fxje' id='Login_Yes'>" +
+                                                    "<a href='../User/CourseCreate.aspx' class='white-link sb become-ins-link'>Tạo khóa học</a>" +
+                                                    "<span class='green-separator'></span>" +
+                                                    "<a href='../User/CourseUserManage.aspx' class='white-link sb my-courses-link'>Khóa học của tôi</a>" +
+                                                    "<span class='green-separator'></span>" +
+                                                     "<a href='javascript:void(0)' onclick='Logout()' class='white-link sb my-courses-link'>Đăng xuất</a>" +
+                                               " </div>";
+                                    $('#Login_No').html(html);//thay đổi đoạn html đã đăng nhập thành công ở header
+
+                                },
+                                error: function (e) {
+                                    alert("Đăng nhập thất bại! Kiểm tra lại thông tin đăng nhập");
+                                },
+                            });
+                        }
+                        else
+                            alert("Email không hợp lệ!");
+                    }
+                }
+
+                //Hàm đăng xuất
+                function Logout() {
+                    //set session bằng null
+                    $.ajax({
+                        type: 'POST', //co 2 loai POST va GET, dùng POST để che dấu các thông tin truyền về server trên url
+                        contentType: 'application/json; charset=utf-8', //khai báo những thông số với dữ liệu json, mã utf-8
+                        url: '/Default.aspx/DangXuat', //đường dẫn phương thức xử lý đăng nhập ở server
+                        data: "{}",//dữ liệu truyền về server
+                        dataType: "json",//kiểu dữ liệu json
+                        success: function (response2) {
+                            //sau đó load lại trang Default
+                            window.location.replace("../Default.aspx");
+                        },
+                        error: function (e) {
+                        },
+                    });
+                }
+            </script>
+        </header>
+
+        <div class="main container ud-courseimpressiontracker featured-courses with-sidebar" style="min-height: 500px;" id="noidung">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div id="footer-37">
+            <div class="bottom">
+                <div class="container">
+                    <ul class="clearfix">
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Quy định - Chính sách</a></li>
+                        <li><a href="#">Hỏi đáp</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                    <div id="copyright">Study English Online &copy; 2014</div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</body>
+</html>
